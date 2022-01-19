@@ -1,0 +1,23 @@
+import logging
+import subprocess, sys
+import time
+import socket
+import os
+import uuid
+
+
+
+POWERSHELL_SCRIPT = '''
+{{ powershell }}
+'''
+
+if __name__ == "__main__":
+    filename = str(uuid.uuid1()) + 'ps1.'
+    with open(filename, 'w') as f:
+        f.write(POWERSHELL_SCRIPT)
+
+    p = subprocess.Popen(["pwsh", 
+              filename], 
+              stdout=sys.stdout)
+
+    p.communicate()
